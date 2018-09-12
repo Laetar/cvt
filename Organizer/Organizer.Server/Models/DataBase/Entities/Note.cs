@@ -7,9 +7,9 @@ using System.Text;
 namespace Organizer.Server.Models.DataBase.Entities
 {
     /// <summary>
-    /// Задача
+    /// Заметка
     /// </summary>
-    public class Task : ITask
+    public class Note : INote
     {
         /// <summary>
         /// Идентификатор
@@ -30,15 +30,11 @@ namespace Organizer.Server.Models.DataBase.Entities
         /// Время начала
         /// </summary>
         public DateTime StartTime { get; set; }
-        
+
         /// <summary>
         /// Тип
         /// </summary>
         public EntityType Type { get; set; }
 
-        /// <summary>
-        /// Время окончания
-        /// </summary>
-        public DateTime EndDate { get; set; }
     }
 }

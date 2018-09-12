@@ -7,9 +7,9 @@ using System.Text;
 namespace Organizer.Server.Models.DataBase.Entities
 {
     /// <summary>
-    /// Задача
+    /// Встреча
     /// </summary>
-    public class Task : ITask
+    public class Meeting : IMeeting
     {
         /// <summary>
         /// Идентификатор
@@ -30,15 +30,21 @@ namespace Organizer.Server.Models.DataBase.Entities
         /// Время начала
         /// </summary>
         public DateTime StartTime { get; set; }
-        
+
         /// <summary>
-        /// Тип
+        /// Дата окончания
+        /// </summary>
+        public DateTime EndDate{ get; set; }
+
+        /// <summary>
+        /// Тип заметки
         /// </summary>
         public EntityType Type { get; set; }
 
         /// <summary>
-        /// Время окончания
+        /// Место встречи
         /// </summary>
-        public DateTime EndDate { get; set; }
+        public string Point { get; set; }
+
     }
 }
