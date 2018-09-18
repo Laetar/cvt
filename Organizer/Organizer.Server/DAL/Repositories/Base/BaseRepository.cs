@@ -1,13 +1,17 @@
-﻿using Organizer.Server.DAL.Repositories.Interfaces;
+﻿using AutoMapper;
+using Organizer.Server.DAL.Attributes;
+using Organizer.Server.DAL.Repositories.Interfaces;
 using Organizer.Server.Models.DataBase.DBContext;
 using Organizer.Server.Models.DataBase.Entities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Organizer.Server.DAL.Repositories.Base
 {
+    [RepositoryService]
     public abstract class BaseRepository<TE> : IRepository<TE>
         where TE : class, IEntity
     {
@@ -56,7 +60,12 @@ namespace Organizer.Server.DAL.Repositories.Base
         /// <returns></returns>
         public void Update(TE entity)
         {
-            _db.Update(entity);
+            //Из за маппера на стороне веба, трекинг сущности сбрасывается и он считает что ему пришла другая сущность
+            //Решение : достать сущность еще раз и замапить в нее пришедшие параметры 
+            var e = _db.Find<TE>(entity.Id);
+            Mapper.Map<TE,TE>(entity, e);
+
+            _db.Update(e);
             _db.SaveChanges();
         }
 
@@ -65,7 +74,7 @@ namespace Organizer.Server.DAL.Repositories.Base
         /// </summary>
         /// <param name="predicate">predicate</param>
         /// <returns></returns>
-        public IEnumerable<TE> GetList(Func<TE, bool> predicate)
+        public IEnumerable<TE> GetList(Expression<Func<TE, bool>> predicate)
         {
             var dbentitylist = _db.Set<TE>().Where(predicate);
 
@@ -80,6 +89,15 @@ namespace Organizer.Server.DAL.Repositories.Base
         public TE Get(int id)
         {
             return _db.Find<TE>(id);
+        }
+
+        /// <summary>
+        /// Получить все сущности
+        /// </summary>
+        /// <returns>Список сущностей</returns>
+        public IEnumerable<TE> GetAll()
+        {
+            return _db.Set<TE>().ToList();
         }
     }
 }

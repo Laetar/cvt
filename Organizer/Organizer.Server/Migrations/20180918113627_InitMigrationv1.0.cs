@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Organizer.Web.Migrations
+namespace Organizer.Server.Migrations
 {
-    public partial class InitMigration11 : Migration
+    public partial class InitMigrationv10 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,7 @@ namespace Organizer.Web.Migrations
                     Description = table.Column<string>(nullable: true),
                     StartTime = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
-                    Type = table.Column<int>(nullable: false),
+                    Type = table.Column<int>(nullable: false, defaultValue: 3),
                     Point = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -35,7 +35,7 @@ namespace Organizer.Web.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     StartTime = table.Column<DateTime>(nullable: false),
-                    Type = table.Column<int>(nullable: false)
+                    Type = table.Column<int>(nullable: false, defaultValue: 2)
                 },
                 constraints: table =>
                 {
@@ -51,7 +51,7 @@ namespace Organizer.Web.Migrations
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     StartTime = table.Column<DateTime>(nullable: false),
-                    Type = table.Column<int>(nullable: false),
+                    Type = table.Column<int>(nullable: false, defaultValue: 1),
                     EndDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

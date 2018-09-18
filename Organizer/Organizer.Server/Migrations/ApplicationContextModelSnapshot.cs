@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Organizer.Server.Models.DataBase.DBContext;
+using Organizer.Server.Models.DataBase.Enums;
 
-namespace Organizer.Web.Migrations
+namespace Organizer.Server.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
     partial class ApplicationContextModelSnapshot : ModelSnapshot
@@ -27,7 +28,7 @@ namespace Organizer.Web.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<DateTime>("EndDate");
+                    b.Property<DateTime?>("EndDate");
 
                     b.Property<string>("Name");
 
@@ -35,7 +36,9 @@ namespace Organizer.Web.Migrations
 
                     b.Property<DateTime>("StartTime");
 
-                    b.Property<int>("Type");
+                    b.Property<int>("Type")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(3);
 
                     b.HasKey("Id");
 
@@ -54,7 +57,9 @@ namespace Organizer.Web.Migrations
 
                     b.Property<DateTime>("StartTime");
 
-                    b.Property<int>("Type");
+                    b.Property<int>("Type")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(2);
 
                     b.HasKey("Id");
 
@@ -69,13 +74,15 @@ namespace Organizer.Web.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<DateTime>("EndDate");
+                    b.Property<DateTime?>("EndDate");
 
                     b.Property<string>("Name");
 
                     b.Property<DateTime>("StartTime");
 
-                    b.Property<int>("Type");
+                    b.Property<int>("Type")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValue(1);
 
                     b.HasKey("Id");
 

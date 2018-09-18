@@ -1,6 +1,7 @@
 ﻿using Organizer.Server.Models.DataBase.Entities.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace Organizer.Server.DAL.Repositories.Interfaces
@@ -14,6 +15,12 @@ namespace Organizer.Server.DAL.Repositories.Interfaces
         /// <param name="entity">Новая сущность</param>
         /// <returns>Id новой сущности</returns>
         int Create(T entity);
+
+        /// <summary>
+        /// Получить все сущности
+        /// </summary>
+        /// <returns>Список сущностей</returns>
+        IEnumerable<T> GetAll();
 
         /// <summary>
         /// Удаляет сущность
@@ -34,7 +41,7 @@ namespace Organizer.Server.DAL.Repositories.Interfaces
         /// </summary>
         /// <param name="predicate">predicate</param>
         /// <returns></returns>
-        IEnumerable<T> GetList(Func<T, bool> predicate);
+        IEnumerable<T> GetList(Expression<Func<T, bool>> predicate);
 
         /// <summary>
         /// Возвращает сущность типа T по id

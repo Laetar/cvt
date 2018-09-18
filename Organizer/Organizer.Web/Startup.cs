@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Organizer.Server.DAL.Attributes;
 using Organizer.Server.Models.DataBase.DBContext;
+using Organizer.Web.AutoMapper;
 
 namespace Organizer.Web
 {
@@ -25,6 +27,16 @@ namespace Organizer.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.Scan(x => x.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
+                 .AddClasses(classes => classes.WithAttribute<ApplicationService>())
+                     .AsSelf()
+                     .WithSingletonLifetime()
+                 .AddClasses(classes => classes.WithAttribute<RepositoryService>())
+                    .AsImplementedInterfaces()
+                    .WithSingletonLifetime()
+             );
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -34,6 +46,8 @@ namespace Organizer.Web
 
             services.AddEntityFrameworkSqlServer().AddDbContext<ApplicationContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Organizer.Web")));
+
+            AutoMapperProfile.Initialize();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

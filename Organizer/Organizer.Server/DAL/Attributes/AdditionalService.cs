@@ -5,11 +5,10 @@ using System.Text;
 namespace Organizer.Server.DAL.Attributes
 {
     /// <summary>
-    /// Атрибут для пометки репозиториев
+    /// Атрибут для пометки доп сервисов
     /// </summary>
-    public class RepositoryService : Attribute
+    public class AdditionalService : Attribute
     {
-    }
 
-    
+    }
 }

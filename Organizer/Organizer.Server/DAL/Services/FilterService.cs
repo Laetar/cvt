@@ -8,9 +8,11 @@ using System.Linq;
 using System.Text;
 using LinqKit;
 using Organizer.Server.DAL.Services.Interfaces;
+using Organizer.Server.DAL.Attributes;
 
 namespace Organizer.Server.DAL.Services
 {
+    [AdditionalService]
     public class FilterService : IFilterService
     {
         private readonly IEnumerable<IRepository<IEntity>> repositories;
@@ -20,13 +22,13 @@ namespace Organizer.Server.DAL.Services
             this.repositories = repositories;
         }
 
-        public IEnumerable<IEntity> ExecuteFilter(IFilterContainer typeFilter)
+        public IEnumerable<IEntity> ExecuteFilter(IFilterContainer filter)
         {
             var result = new List<IEntity>();
 
             foreach(IRepository<IEntity> repo in repositories)
             {
-                result.AddRange(repo.GetList(x => x.Type == typeFilter.Type));
+                result.AddRange(repo.GetList(filter.GetPredicate));
             }
 
             return result;

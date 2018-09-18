@@ -39,6 +39,6 @@ namespace Organizer.Server.Models.DataBase.Entities
         /// <summary>
         /// Время окончания
         /// </summary>
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
     }
 }

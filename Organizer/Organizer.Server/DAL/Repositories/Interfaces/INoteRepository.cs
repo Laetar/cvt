@@ -1,11 +1,8 @@
-﻿using Organizer.Server.Models.DataBase.Entities.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Organizer.Server.Models.DataBase.Entities;
 
 namespace Organizer.Server.DAL.Repositories.Interfaces
 {
-    public interface INoteRepository: IRepository<INote>
+    public interface INoteRepository: IRepository<Note>
     {
     }
 }

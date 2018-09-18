@@ -32,5 +32,12 @@ namespace Organizer.Server.Models.Filters
             _predicate.And(predicate);
         }
 
+        public Expression<Func<IEntity, bool>> GetPredicate
+        {
+            get
+            {
+                return _predicate;
+            }
+        }
     }
 }
