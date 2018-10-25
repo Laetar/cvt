@@ -14,7 +14,6 @@ namespace Organizer.Server.Models.DataBase.DBContext
     public class ApplicationContext : DbContext
     {
         public ApplicationContext(IConfiguration configuration)
-            //: base(options)
         {
             Configuration = configuration;
         }

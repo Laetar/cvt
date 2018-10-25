@@ -31,8 +31,11 @@ namespace Organizer.Web
             services.Scan(x => x.FromAssemblies(AppDomain.CurrentDomain.GetAssemblies())
                  .AddClasses(classes => classes.WithAttribute<ApplicationService>())
                      .AsSelf()
-                     .WithSingletonLifetime()
+                     .WithScopedLifetime()
                  .AddClasses(classes => classes.WithAttribute<RepositoryService>())
+                    .AsImplementedInterfaces()
+                    .WithScopedLifetime()
+                 .AddClasses(classes => classes.WithAttribute<AdditionalService>())
                     .AsImplementedInterfaces()
                     .WithSingletonLifetime()
              );
